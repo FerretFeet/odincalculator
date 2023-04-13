@@ -1,0 +1,78 @@
+@font-face {
+    font-family: digital-7;
+    src: url(./font/Digital7Mono-Yz9J4.ttf)
+}
+
+* {
+    font-family: digital-7;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+    font-size: 60px;
+}
+
+button {
+    padding: 0.25rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    box-shadow: 5px 8px 2px 3px lightslategray;
+}
+
+#clear {
+    width: fit-content;
+    background-color: lightblue;
+    align-self: flex-end;
+}
+
+.operator-button, #display{
+    background-color: darkgray;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    background-color: lightgray;
+    padding: .5rem;
+    border: 5px solid black;
+}
+
+#all-button-container {
+    display: flex;
+    gap: .25rem;
+}
+
+.number-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+}
+
+.number-button {
+    width: 30%;
+}
+
+.operator-button-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25rem;
+    justify-content: space-evenly;
+}
+
+.operator-button {
+    width: 45%;
+}
+
+#display {
+    margin-bottom: 1rem;
+    margin-top: 1rem;
+    display: flex;
+    flex-grow: 1;
+    justify-content: right;
+    padding: .25rem;
+    width: 100%;
+    font-size: 100px;
+}
