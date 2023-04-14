@@ -24,7 +24,7 @@ button {
     align-self: flex-end;
 }
 
-.operator-button, #display{
+.operator-button, .display{
     background-color: darkgray;
 }
 
@@ -66,7 +66,7 @@ main {
     width: 45%;
 }
 
-#display {
+.display {
     margin-bottom: 1rem;
     margin-top: 1rem;
     display: flex;
@@ -75,4 +75,8 @@ main {
     padding: .25rem;
     width: 100%;
     font-size: 100px;
+}
+
+#display-result {
+    display: none;
 }

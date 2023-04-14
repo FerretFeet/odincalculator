@@ -38,7 +38,9 @@ const createNumberButtons = function() {
     let buttons = document.getElementsByClassName('number-button');
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
+            if (displayString.length > 11) {alert('Too Many Digits! Press ='); return;}
             displayString = displayString.concat(buttons[i].textContent)
+            displayResult(displayString);
         })
     }
 }
@@ -47,12 +49,14 @@ const createOperatorButtons = function() {
     let buttons = document.getElementsByClassName('operator-button');
     for (let i = 0; i < buttons.length; i++) {
         buttons[i].addEventListener('click', () => {
+            if (displayString.length > 11) {alert('Too Many Digits! Press ='); return;}
             let regEx = /[+x/-]+$/;
             let tempString = displayString;
             if (regEx.test(displayString) == true) {
                 tempString = displayString.slice(0, displayString.length-1);
             };
             displayString = tempString.concat(buttons[i].textContent);
+            displayResult(displayString);
         });
 
     }
@@ -72,7 +76,7 @@ const arrayFromString = function(String) {
 createAllButtons()
 
 const computeAnswer = function(Array) {
-    let answer = null;
+    let answer = Array[0];
     let tempArray = Array
     let splicedArray = []
     while(Array.length > 1) {
@@ -80,6 +84,7 @@ const computeAnswer = function(Array) {
         answer = operate(splicedArray[0], splicedArray[1], splicedArray[2])
         Array.unshift(answer)
     }
+    displayResult(answer)
     return answer;
 }
 
@@ -90,3 +95,32 @@ const onEqualsPress = function(String) {
 
 let equals = document.getElementById('equals');
 equals.addEventListener('click', () => displayString=String(onEqualsPress(displayString)))
+
+const resultDisplay = document.getElementById('display-result')
+const displayResult = function(result) {
+    if (resultDisplay.style.display == '' || 'none') {
+        resultDisplay.style.display = 'flex'
+        document.getElementById('display-default').style.display='none'
+    }
+    resultDisplay.innerHTML = result;
+}
+
+const clearButton = document.getElementById('clear')
+clearButton.addEventListener('click', () => {
+    displayString = ''
+    resultDisplay.style.display = 'none'
+    document.getElementById('display-default').style.display='flex'
+})
+
+const decimalButton = document.getElementById('decimal')
+decimalButton.addEventListener('click', () => {
+    if (displayString.length > 11) {alert('Too Many Digits! Press ='); return}
+    let regEx = /\.(\d)*[^+/x-]*\./g;
+    displayString = displayString.concat(decimalButton.textContent);
+    if (regEx.test(displayString)){ 
+        alert('Only one decimal allowed!')
+        displayString = displayString.slice(0, displayString.length - 1);
+      } else  {
+        displayResult(displayString);
+    }
+})
